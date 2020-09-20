@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        div {
+
+            display: block;
+            text-align: right;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+    <meta charset="UTF-8">
+
+
+    <link rel="stylesheet" href="css/signature-pad.css">
+
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-39365077-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' === document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+
+    <title>הצהרה חדשה</title>
+</head>
+<body dir="rtl">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div dir="ltr">
+                <img align="left" src="Servi-Tech.png" alt="Servi-Tech" width="30%" height="15%">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div dir="ltr">
+                <div dir="rtl" id="demo">
+                    <h3>נא למלא את הפרטים:</h3>
+                    <form>
+                        <!--    Name-->
+                        <div class="col-sm my-1">
+                            <div class="input-group">
+                                <label>
+                                    <h6><strong>שם פרטי ומשפחה *</strong></h6>
+                                    <input class="form-control"
+                                           style="box-shadow: 0 0 3px 0 red;width:250%"
+                                           type="text"
+
+                                           v-model="signupForm.Name">
+                                </label>
+                            </div>
+                        </div>
+                        <!--    CellNum-->
+                        <div class="col-sm my-1">
+                            <div class="input-group">
+                                <label>
+                                    <h6><strong>מספר טלפון נייד *</strong></h6>
+                                    <input type="number" class="form-control"
+                                           style="box-shadow: 0 0 3px 0 red;width:250%"
+                                           v-model="signupForm.CellNum">
+                                </label>
+                            </div>
+                        </div>
+                        <!--   Id -->
+                        <div class="col-sm my-1">
+
+                            <div class="input-group">
+                                <label>
+                                    <h6><strong>מספר תעודת זהות *</strong></h6>
+                                    <input type="number" class="form-control"
+                                           style="box-shadow: 0 0 3px 0 red;width:250%"
+                                           v-model="signupForm.Id">
+                                </label>
+                            </div>
+                        </div>
+                        <!--Coughing-->
+
+                        <div class="col-sm my-1">
+                            <br>
+                            <h6><strong>האם את\ה משתעל\ת?</strong></h6>
+                            <input type="radio" id="CoughingNo" name="Coughing"
+                                   value="לא" v-model="signupForm.Coughing">
+                            <label for="CoughingNo">לא</label><br>
+                            <input type="radio" id="CoughingYes" name="Coughing"
+                                   value="כן" v-model="signupForm.Coughing">
+                            <label for="CoughingYes">כן</label><br>
+                            <input type="radio" id="CoughingOther" name="Coughing"
+                                   value="כן, משתעל\ת בשל מצב כרוני כגון אסתמה או אלרגיה אחרת."
+                                   v-model="signupForm.Coughing">
+                            <label for="CoughingOther">כן, משתעל\ת בשל מצב כרוני כגון אסתמה או
+                                אלרגיה אחרת.</label><br>
+                        </div>
+
+                        <!--      TemperatureAbove38  -->
+
+                        <div class="col-sm my-1">
+                            <br>
+                            <h6><strong>האם חום גופך מעל 38 מעלות צלסיוס ומעלה או האם היה לך חום
+                                כאמור בשבוע
+                                האחרון?</strong></h6>
+                            <input type="radio" id="TemperatureAbove38No"
+                                   name="TemperatureAbove38No" value="לא"
+                                   v-model="signupForm.TemperatureAbove38">
+                            <label for="TemperatureAbove38No">לא</label><br>
+                            <input type="radio" id="TemperatureAbove38Yes" name="TemperatureAbove38"
+                                   value="כן" v-model="signupForm.TemperatureAbove38">
+                            <label for="TemperatureAbove38Yes">כן</label><br>
+                        </div>
+
+
+                        <!-- ContactWithIll-->
+
+                        <div class="col-sm my-1">
+                            <br>
+                            <h6><strong>האם היית במגע קרוב עם חולה קורונה בשבועיים
+                                האחרונים?</strong></h6>
+                            <input type="radio" id="ContactWithIllNo" value="לא"
+                                   v-model="signupForm.ContactWithIll">
+                            <label for="ContactWithIllNo">לא</label><br>
+                            <input type="radio" id="ContactWithIllYes"
+                                   value="כן" v-model="signupForm.ContactWithIll">
+                            <label for="ContactWithIllYes">כן</label><br>
+                        </div>
+
+                        <h5 style="text-align:center"><strong>חתימה:</strong></h5>
+
+                        <div>
+                            <button type="button"
+                                    class="btn btn-danger btn-lg btn-block"
+                                    v-on:click="addDeclaration()" style="margin-top:30%">
+                                שלח
+                            </button>
+                        </div>
+
+                    </form>
+
+
+                </div>
+                <div id='signature-pad' class="signature-pad"
+                     style="margin-top:-35%;left: 35%;height: 250px">
+                    <div class="signature-pad--body">
+                        <canvas></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/signature_pad.umd.js"></script>
+
+
+</body>
+
+<script src="main.js"></script>
+</html>

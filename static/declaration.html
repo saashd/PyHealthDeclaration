@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="he" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="refresh" content="20"/>
+    <title>הצהרות חתומות</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script src="https://unpkg.com/vue"></script>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+
+<body>
+
+<div id="demo" class="table-responsive">
+    <table class="table-hover table table-bordered">
+        <thead>
+        <tr style="text-align:right;">
+            <th scope="col">תאריך</th>
+            <th scope="col">שם ושם משפחה</th>
+            <th scope="col">מספר טלפון</th>
+            <th scope="col">תעודת זהות</th>
+            <th scope="col">שיעול</th>
+            <th scope="col">חום מעל ל-38</th>
+            <th scope="col">בא\ה במגע עם חולה קורונה</th>
+            <th scope="col">חתימה</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="text-align:right" v-for="(item, idx) in gridData">
+            <td>{{item.Date}}</td>
+            <td>{{item.Name}}</td>
+            <td>{{item.CellNum}}</td>
+            <td>{{item.Id}}</td>
+            <td>{{item.Coughing}}</td>
+            <td>{{item.TemperatureAbove38}}</td>
+            <td>{{item.ContactWithIll}}</td>
+            <td v-if="item.Sign !== ''"><img v-bind:src="item.Sign" width="40" height="40"></td>
+            <td v-else> </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+<script src="main2.js"></script>
+</html>
