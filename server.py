@@ -13,6 +13,11 @@ import glob
 
 # .py to .exe : install pyinstaller and write in cmd: pyinstaller --onefile server.py
 
+def parse_json():
+    with open('config.json') as f:
+        data = json.load(f)
+        return data
+
 
 # style df
 def get_df(file):
@@ -31,7 +36,6 @@ CORS(app)
 
 @app.route('/api/index', methods=['GET', 'POST'])
 def index():
-
     df = get_df('declarationTable.xlsx')
     df = df.sort_values(by='Date', ascending=False)
     debt_json = df.to_json(orient='records', force_ascii=False)
@@ -39,13 +43,10 @@ def index():
     return ret
 
 
-
-
-
 @app.route('/api/Post', methods=['GET', 'POST'])
 def addDeclaration():
     resource_df = get_df('declarationTable.xlsx')
-    Date=request.json['Date']
+    Date = request.json['Date']
 
     Name = request.json['Name']
     CellNum = request.json['CellNum']
@@ -55,8 +56,7 @@ def addDeclaration():
     ContactWithIll = request.json['ContactWithIll']
     Sign = request.json['Sign']
 
-
-    newDeclaration = {'Date':Date,'Name': Name, 'CellNum': CellNum,
+    newDeclaration = {'Date': Date, 'Name': Name, 'CellNum': CellNum,
                       'Id': Id, 'Coughing': Coughing,
                       'TemperatureAbove38': TemperatureAbove38, 'ContactWithIll': ContactWithIll,
                       'Sign': Sign}
@@ -67,8 +67,19 @@ def addDeclaration():
     return json.dumps(newDeclaration, ensure_ascii=False)
 
 
-if __name__ == '__main__':
-    print("Please Don't close this window until you're done")
-    app.run(host='0.0.0.0', port="5000")
+def main():
+    data = parse_json()
+    host = data['localhost']
+    port = data['port']
+    if host == True:
+        app.run(port=port)
+    else:
+        app.run(host='0.0.0.0', port=port)
+
     if input() == 'quit':
         sys.exit(0)
+    return
+
+
+if __name__ == '__main__':
+    main()
