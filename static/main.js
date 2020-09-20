@@ -104,6 +104,10 @@ let demo = new Vue({
                 alert('נא להזין את מספר תעודת הזהות');
                 return false
             }
+            if ((this.signupForm.Id !== null)&&(this.signupForm.Id.length!=9)) {
+                alert('מספר תעודת הזהות לא תקין');
+                return false
+            }
             if ((this.signupForm.Coughing === null) ||
                 (this.signupForm.TemperatureAbove38 === null) || (this.signupForm.ContactWithIll === null)) {
                 alert('נא למלא את הפרטים החסרים');
